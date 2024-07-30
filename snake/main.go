@@ -2,6 +2,8 @@
 package main
 
 import (
+	"goraylib-studies/util"
+
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -20,6 +22,7 @@ var (
 	snakeLength   int32
 	moveDirection rl.Vector2
 	gameOver      bool
+	foodPos       rl.Vector2
 )
 
 func main() {
@@ -58,6 +61,8 @@ func restart() {
 	moveDirection = rl.Vector2{1, 0}
 
 	gameOver = false
+
+	placeFood()
 }
 
 func update() {
@@ -98,14 +103,28 @@ func update() {
 			gameOver = true
 		}
 
+		if headPos == foodPos {
+			snakeLength += 1
+			placeFood()
+		}
+
 		for i := int32(1); i < snakeLength; i++ {
 			snake[i], nextPartPos = nextPartPos, snake[i]
 		}
+
 		tickTimer = TickRate + tickTimer
 	}
 }
 
 func draw() {
+	foodRect := rl.Rectangle{
+		foodPos.X * CellSize,
+		foodPos.Y * CellSize,
+		CellSize,
+		CellSize,
+	}
+	rl.DrawRectangleRec(foodRect, rl.Red)
+
 	for i := range snakeLength {
 		headRect := rl.Rectangle{
 			snake[i].X * CellSize,
@@ -119,5 +138,26 @@ func draw() {
 	if gameOver {
 		rl.DrawText("Game Over!", 4, 4, 25, rl.Red)
 		rl.DrawText("Press Enter to play again!", 4, 30, 15, rl.Black)
+	}
+}
+
+func placeFood() {
+	var occupied [GridWidth][GridWidth]bool
+	for i := range snakeLength {
+		occupied[int(snake[i].X)][int(snake[i].Y)] = true
+	}
+
+	var freeCells []rl.Vector2
+	for x := range GridWidth {
+		for y := range GridWidth {
+			if !occupied[x][y] {
+				freeCells = append(freeCells, rl.Vector2{float32(x), float32(y)})
+			}
+		}
+	}
+
+	if len(freeCells) > 0 {
+		randomCellIdx := util.RandRange(0, len(freeCells))
+		foodPos = freeCells[randomCellIdx]
 	}
 }
