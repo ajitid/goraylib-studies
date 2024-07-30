@@ -1,4 +1,4 @@
-package shared
+package util
 
 import (
 	"math"
@@ -12,9 +12,9 @@ import (
 	While some of these utilities are present in `rl.` scope, few of them call into FFI.
 */
 
-// [min, max)
+// [min, max], not [min, max)
 func RandRange(min, max int) int {
-	return rand.IntN(max-min) + min
+	return rand.IntN(max+1-min) + min
 }
 
 func Clamp(min, max, val int) int {
