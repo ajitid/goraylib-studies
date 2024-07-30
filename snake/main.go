@@ -110,6 +110,10 @@ func update() {
 
 		for i := int32(1); i < snakeLength; i++ {
 			snake[i], nextPartPos = nextPartPos, snake[i]
+
+			if snake[i] == headPos {
+				gameOver = true
+			}
 		}
 
 		tickTimer = TickRate + tickTimer
