@@ -24,7 +24,7 @@ type basePayload struct {
 	CType string
 }
 
-func set(w http.ResponseWriter, r *http.Request) {
+func setHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		w.WriteHeader(405)
 		return
@@ -84,6 +84,11 @@ func set(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func homeHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "all good!")
+}
+
 func RunServer() {
 	server := sse.New()
 	server.CreateStream("messages")
@@ -97,7 +102,8 @@ func RunServer() {
 	}()
 
 	http.HandleFunc("/events", server.ServeHTTP)
-	http.HandleFunc("/set", set)
+	http.HandleFunc("/", homeHandler)
+	http.HandleFunc("/set", setHandler)
 
 	c := cors.Default()
 	handler := c.Handler(http.DefaultServeMux)
