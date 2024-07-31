@@ -68,6 +68,28 @@ You can add some negative value to Y if think the font not optically centered. I
 - [In Windows](https://github.com/ajitid/stellate/blob/main/single-instance_windows.go)
 - [In macOS and Linux](https://claude.ai/chat/38e56e68-e64a-4a1b-8272-7ac1a5e7ba82)
 
+## Do movements/animation using timer
+
+```go
+rl.SetConfigFlags(rl.FlagVsyncHint)
+rl.InitWindow(WinSize, WinSize, "snake")
+defer rl.CloseWindow()
+
+for !rl.WindowShouldClose() {
+	tickTimer -= rl.GetFrameTime()
+	if tickTimer <= 0 {
+		snakeHeadPos.Y += 1 // your movement changes go here
+		tickTimer = TickRate + tickTimer
+	}
+
+	rl.BeginDrawing()
+	// ...
+	rl.EndDrawing()
+}
+```
+
+See a concrete implementation in commit 5d726bff5cc6405e6aed574a4e90af148f1a5979
+
 ## Libs
 
 - Alternative to rlgl/OpenGL to make shaders in Go https://github.com/gopxl/glhf
