@@ -74,10 +74,6 @@ func GetFloat(name string) float32 {
 	return *floatMap[name]
 }
 
-func GetFloatPtr(name string) *float32 {
-	return floatMap[name]
-}
-
 ///////// int
 
 func SetInt(name string, value *int32) int32 {
@@ -110,10 +106,6 @@ func setIntInternal(name string, value int32) {
 
 func GetInt(name string) int32 {
 	return *intMap[name]
-}
-
-func GetIntPtr(name string) *int32 {
-	return intMap[name]
 }
 
 ///////// string
@@ -150,10 +142,6 @@ func GetString(name string) string {
 	return *stringMap[name]
 }
 
-func GetStringPtr(name string) *string {
-	return stringMap[name]
-}
-
 ///////// bool
 
 func SetBool(name string, value *bool) bool {
@@ -186,8 +174,4 @@ func setBoolInternal(name string, value bool) {
 
 func GetBool(name string) bool {
 	return *boolMap[name]
-}
-
-func GetBoolPtr(name string) *bool {
-	return boolMap[name]
 }
