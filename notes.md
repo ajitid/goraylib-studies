@@ -7,6 +7,7 @@ go mod tidy # or `go get .`
 ```
 
 Using SDL over GLFW for Raylib because in Wayland it:
+
 - lets me position the window to a monitor
 - doesn't has wonky rendering
 - doesn't has scaling/positioning issues
@@ -63,6 +64,10 @@ if loading {
 
 You can add some negative value to Y if think the font not optically centered. I'm unsure if Raylib supports [leading trim](https://medium.com/microsoft-design/leading-trim-the-future-of-digital-typesetting-d082d84b202) and if not, how easy it would be to support it.
 
+## Variable fonts
+
+See https://claude.ai/chat/ba51903f-ab2e-445e-b26c-b8012009d123
+
 ## Ensuring only a single window of the instance is ever launched
 
 - [In Windows](https://github.com/ajitid/stellate/blob/main/single-instance_windows.go)
@@ -95,20 +100,20 @@ See a concrete implementation in commit 5d726bff5cc6405e6aed574a4e90af148f1a5979
 - Alternative to rlgl/OpenGL to make shaders in Go https://github.com/gopxl/glhf
 - Sound https://github.com/gopxl/beep
 - Retry github.com/avast/retry-go/v4
-- Global hotkey github.com/robotn/gohook. For special keys, [see this](https://github.com/ajitid/stellate/blob/06989b0de27999ff514d87a959bcf8a147904693/main.go#L132-L152) 
+- Global hotkey github.com/robotn/gohook. For special keys, [see this](https://github.com/ajitid/stellate/blob/06989b0de27999ff514d87a959bcf8a147904693/main.go#L132-L152)
 - Keys emulation github.com/micmonay/keybd_event
 - Tween animation https://github.com/tanema/gween
 - Spring https://github.com/charmbracelet/harmonica
 - Physics engine
-	- Basic
-		- https://github.com/divVerent/awesome-ebiten?tab=readme-ov-file#physics
-		- https://github.com/rudransh61/Physix-go
-	- Rope
-		- https://x.com/hemarkable/status/1817105134243184999
-		- https://github.com/ByteArena/box2d/blob/master/DynamicsB2Rope.go
-	- Nature
-		- https://pkg.go.dev/github.com/g3n/engine/experimental/physics
-		- https://commerce.nearform.com/open-source/renature
+  - Basic
+    - https://github.com/divVerent/awesome-ebiten?tab=readme-ov-file#physics
+    - https://github.com/rudransh61/Physix-go
+  - Rope
+    - https://x.com/hemarkable/status/1817105134243184999
+    - https://github.com/ByteArena/box2d/blob/master/DynamicsB2Rope.go
+  - Nature
+    - https://pkg.go.dev/github.com/g3n/engine/experimental/physics
+    - https://commerce.nearform.com/open-source/renature
 
 ## Other resources
 
