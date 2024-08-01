@@ -101,6 +101,25 @@ for !rl.WindowShouldClose() {
 
 See a concrete implementation in commit 5d726bff5cc6405e6aed574a4e90af148f1a5979
 
+## Getting focus back on editor
+
+Because SDL doesn't support `rl.FlagWindowUnfocused` at the moment, as soon as the renderer window is open it grabs the focus away from editor. Which is probably not what you want if you are tweaking some values to see what happens.
+
+To fix this in Wayland Gnome, install [this extension](https://extensions.gnome.org/extension/5021/activate-window-by-title/).
+
+If you install it directly, you may need to hit `alt-f2`, type `r` and hit enter.
+Otherwise you can install it using [Extension Manager](https://github.com/mjakeman/extension-manager) app.
+
+Call it as a goroutine in your main(), preferably after `rl.SetWindowMonitor()` if you've used it:
+
+```go
+go util.FocusEditor()
+```
+
+Further reading:
+
+- https://unix.stackexchange.com/a/700116
+
 ## Libs
 
 - Alternative to rlgl/OpenGL to make shaders in Go https://github.com/gopxl/glhf
