@@ -1,6 +1,11 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	"goraylib-studies/ctrl"
+	"goraylib-studies/util"
+
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
 
 const (
 	WinWidth  = 800
@@ -8,16 +13,19 @@ const (
 )
 
 func main() {
+	go ctrl.RunServer()
 	rl.SetConfigFlags(rl.FlagVsyncHint)
 	rl.InitWindow(WinWidth, WinHeight, "base")
 	defer rl.CloseWindow()
 
 	// Useful during development:
 	// rl.SetWindowState(rl.FlagWindowUnfocused) // not supported in SDL backend atm
-	// rl.SetWindowMonitor(1)
+	rl.SetWindowMonitor(1)
+	go util.FocusEditor()
 
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
+		ctrl.IsDrawing = true
 		// rl.ClearBackground(rl.Blank) // or
 		rl.ClearBackground(rl.NewColor(76, 53, 83, 255))
 
@@ -32,6 +40,7 @@ func main() {
 		*/
 		rl.DrawRectangleLines(0, 0, WinWidth, WinHeight, rl.Pink) // canvas border
 
+		ctrl.IsDrawing = false
 		rl.EndDrawing()
 	}
 }

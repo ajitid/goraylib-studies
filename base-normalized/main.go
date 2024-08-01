@@ -1,6 +1,11 @@
 package main
 
-import rl "github.com/gen2brain/raylib-go/raylib"
+import (
+	"goraylib-studies/ctrl"
+	"goraylib-studies/util"
+
+	rl "github.com/gen2brain/raylib-go/raylib"
+)
 
 const (
 	WinWidth  = 800
@@ -8,19 +13,22 @@ const (
 )
 
 func main() {
+	go ctrl.RunServer()
 	rl.SetConfigFlags(rl.FlagVsyncHint)
 	rl.InitWindow(WinWidth, WinHeight, "base normalized")
 	defer rl.CloseWindow()
 
 	// Useful during development:
 	// rl.SetWindowState(rl.FlagWindowUnfocused) // not supported in SDL backend atm
-	// rl.SetWindowMonitor(1)
+	rl.SetWindowMonitor(1)
+	go util.FocusEditor()
 
 	// Create a camera
 	camera := rl.Camera2D{}
 
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
+		ctrl.IsDrawing = true
 		// rl.ClearBackground(rl.Blank) // or
 		rl.ClearBackground(rl.Black)
 
@@ -59,6 +67,7 @@ func main() {
 		rl.DrawText("Y range is (-1,1), 1 is at bottom", 6, 28+6+20, 20, rl.White)
 		rl.DrawText("X range is (-1,1), 1 is at right", 6, 28+6+20+20, 20, rl.White)
 
+		ctrl.IsDrawing = false
 		rl.EndDrawing()
 	}
 }
