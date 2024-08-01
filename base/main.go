@@ -9,7 +9,7 @@ const (
 
 func main() {
 	rl.SetConfigFlags(rl.FlagVsyncHint)
-	rl.InitWindow(WinWidth, WinHeight, "heya")
+	rl.InitWindow(WinWidth, WinHeight, "base")
 	defer rl.CloseWindow()
 
 	// Useful during development:
@@ -25,7 +25,7 @@ func main() {
 		rl.DrawRectangle(0, 0, 14, 14, rl.Blue)       // top-left
 
 		/*
-			Add ` | rl.FlagWindowHighdpi` to `rl.SetConfigFlags` if ^ this pink border is not drawn at the edges of the window
+			Add ` | rl.FlagWindowHighdpi` to `rl.SetConfigFlags()` if this pink border is not drawn at the edges of the window
 			Do note that in this case texture scaling should be done by you. See:
 			- https://github.com/raysan5/raylib/issues/2566
 			- https://github.com/raysan5/raylib/discussions/2999

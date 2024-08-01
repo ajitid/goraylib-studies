@@ -25,6 +25,12 @@ go run -tags sdl .
 watchexec -qnrc -- go run -tags sdl .
 ```
 
+IF you want to watch some other directory too, then use:
+
+```sh
+watchexec -qnrc -w ../util -w . -- go run -tags sdl .
+```
+
 ## Loading an external font
 
 ```go
