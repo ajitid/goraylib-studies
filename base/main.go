@@ -7,15 +7,15 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const (
-	WinWidth  = 800
-	WinHeight = 600
+var (
+	winWidth  int32 = 800
+	winHeight int32 = 600
 )
 
 func main() {
 	go ctrl.RunServer()
 	rl.SetConfigFlags(rl.FlagVsyncHint)
-	rl.InitWindow(WinWidth, WinHeight, "base")
+	rl.InitWindow(winWidth, winHeight, "base")
 	defer rl.CloseWindow()
 
 	// Useful during development:
@@ -24,6 +24,9 @@ func main() {
 	go util.FocusEditor()
 
 	for !rl.WindowShouldClose() {
+		winWidth = int32(rl.GetScreenWidth())
+		winHeight = int32(rl.GetScreenHeight())
+
 		rl.BeginDrawing()
 		ctrl.IsDrawing = true
 		// rl.ClearBackground(rl.Blank) // or
@@ -38,7 +41,7 @@ func main() {
 			- https://github.com/raysan5/raylib/issues/2566
 			- https://github.com/raysan5/raylib/discussions/2999
 		*/
-		rl.DrawRectangleLines(0, 0, WinWidth, WinHeight, rl.Pink) // canvas border
+		rl.DrawRectangleLines(0, 0, winWidth, winHeight, rl.Pink) // canvas border
 
 		ctrl.IsDrawing = false
 		rl.EndDrawing()
