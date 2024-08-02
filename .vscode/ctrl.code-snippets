@@ -1,0 +1,39 @@
+/*
+  To use these, either:
+  - select the number (or the value) you want to control and then type `ci` and hit enter, or
+  - select the value, Ctrl+P > Snippets: Surround with snippet... and then select the ctrl you want to surround it with.
+*/
+{
+	"ctrl float value": {
+    "scope": "go",
+    "prefix": "cf",
+    "body": [
+      "ctrl.SetFloatV(\"${1:${TM_FILENAME_BASE}:${RANDOM_HEX}}\", ${TM_SELECTED_TEXT})$0",
+    ],
+    "description": "ctrl float value"
+  },
+	"ctrl int value": {
+		"scope": "go",
+    "prefix": "ci",
+    "body": [
+      "ctrl.SetIntV(\"${1:${TM_FILENAME_BASE}:${RANDOM_HEX}}\", ${TM_SELECTED_TEXT})$0",
+    ],
+    "description": "ctrl int value"
+  },
+	"ctrl bool value": {
+		"scope": "go",
+    "prefix": "cb",
+    "body": [
+      "ctrl.SetBoolV(\"${1:${TM_FILENAME_BASE}:${RANDOM_HEX}}\", ${TM_SELECTED_TEXT})$0",
+    ],
+    "description": "ctrl bool value"
+  },
+	"ctrl string value": {
+		"scope": "go",
+    "prefix": "cs",
+    "body": [
+      "ctrl.SetStringV(\"${1:${TM_FILENAME_BASE}:${RANDOM_HEX}}\", ${TM_SELECTED_TEXT})$0",
+    ],
+    "description": "ctrl string value"
+  }
+}

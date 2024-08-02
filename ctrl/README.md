@@ -50,11 +50,17 @@ PS: see commit 8ab3496bd36ee0dd3e2dba48d17b54cdab690616. We can expose `GetIntPt
 
 ### Variable inside update loop
 
-Irrespective of whether you have created a variable within `update()` loop or outside it, you may want to visualise the change in its value over time. You should use a usual setter in this case:
+Irrespective of whether you have created a variable within `update()` loop or outside it, you may want to visualise the change in its value over time. Or maybe you want to update the control's value. You should use a usual setter in this case:
 
 ```go
-var disturbance float32 = 33.5
-ctrl.SetFloat("disturbance", &disturbance)
+disturbance = rand.Float32()
+ctrl.SetFloat("disturbance", &disturbance) // for visualising continously changing value
+
+
+if(buttonClicked) {
+  selectedPicture = math.Mod(selectedPicture + 1, picturesLen)
+  ctrl.SetFloat("selectedPicture", &selectedPicture) // for informing ctrlui about a change in `selectedPicture`
+}
 ```
 
 ### Wrong usages
